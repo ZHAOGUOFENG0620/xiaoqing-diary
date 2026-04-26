@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>蝉鸣科技 & 赵国锋</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --green: #2d8c6a;
+    --green-light: #a8d8c8;
+    --green-dark: #1a5c42;
+    --dark: #0a1f14;
+    --deep-bg: #0d2418;
+    --card-bg: #122a1c;
+    --text: #f0f7f4;
+    --text-dim: #8ab0a0;
+    --gold: #d4a853;
+  }
+
+  body {
+    font-family: "Georgia", "STSong", "SimSun", serif;
+    background: var(--dark);
+    color: var(--text);
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 50% 30%, #0f3825 0%, #0a1f14 70%);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 0%, rgba(45,140,106,0.2) 0%, transparent 70%),
+      url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1200&q=80') center/cover no-repeat;
+    opacity: 0.2;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(10,31,20,0.2) 0%, rgba(10,31,20,0.92) 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem;
+    max-width: 800px;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--green-light);
+    border: 1px solid var(--green);
+    padding: 0.3rem 1.2rem;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    background: rgba(45,140,106,0.1);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--green-light);
+    text-shadow: 0 2px 30px rgba(45,140,106,0.4);
+    margin-bottom: 0.5rem;
+  }
+
+  .hero h2 {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--text-dim);
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    margin-bottom: 2rem;
+  }
+
+  .hero-quote {
+    max-width: 680px;
+    margin: 0 auto;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--text-dim);
+    font-style: italic;
+    border-left: 3px solid var(--green);
+    padding-left: 1.5rem;
+    text-align: left;
+    background: rgba(45,140,106,0.08);
+    padding: 1.5rem 1.5rem 1.5rem 2rem;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ---- SECTIONS ---- */
+  section {
+    padding: 5rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--green-light);
+    border: 1px solid var(--green);
+    padding: 0.3rem 1rem;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+    background: rgba(45,140,106,0.1);
+  }
+
+  h2.section-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--text);
+    margin-bottom: 2.5rem;
+    font-weight: 700;
+  }
+
+  h2.section-title span { color: var(--green-light); }
+
+  /* ---- DIVIDER ---- */
+  .divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--green), transparent);
+    margin: 0 auto 2rem;
+  }
+
+  /* ---- INTRO ---- */
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (max-width: 700px) {
+    .intro-grid { grid-template-columns: 1fr; }
+  }
+
+  .intro-text p {
+    color: var(--text-dim);
+    margin-bottom: 1.2rem;
+    font-size: 1.05rem;
+  }
+
+  .intro-text p:first-child::first-letter {
+    font-size: 2.5rem;
+    float: left;
+    line-height: 1;
+    margin-right: 0.5rem;
+    color: var(--green-light);
+    font-weight: 700;
+  }
+
+  .intro-img {
+    border-radius: 12px;
+    width: 100%;
+    border: 1px solid rgba(45,140,106,0.2);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    object-fit: cover;
+    max-height: 400px;
+  }
+
+  /* ---- STATS ---- */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 700px) {
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(45,140,106,0.2);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(45,140,106,0.15);
+    border-color: rgba(45,140,106,0.4);
+  }
+
+  .stat-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
+
+  .stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--green-light);
+    line-height: 1.2;
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-top: 0.3rem;
+  }
+
+  /* ---- TIMELINE ---- */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+    border-left: 2px solid rgba(45,140,106,0.25);
+    margin-top: 2rem;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    padding-left: 2rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.7rem;
+    top: 0.3rem;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 10px rgba(45,140,106,0.5);
+  }
+
+  .timeline-year {
+    font-size: 0.8rem;
+    color: var(--green-light);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-item h4 {
+    color: var(--text);
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .timeline-item p {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+  }
+
+  /* ---- BUSINESS ---- */
+  .business-section {
+    background: linear-gradient(135deg, #0d1f14 0%, #112a1a 100%);
+    border-top: 1px solid rgba(45,140,106,0.12);
+    border-bottom: 1px solid rgba(45,140,106,0.12);
+  }
+
+  .business-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .biz-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(45,140,106,0.15);
+    border-radius: 10px;
+    padding: 2rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .biz-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(45,140,106,0.15);
+    border-color: rgba(45,140,106,0.4);
+  }
+
+  .biz-icon { font-size: 2rem; margin-bottom: 1rem; }
+
+  .biz-card h3 {
+    color: var(--green-light);
+    font-size: 1.15rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .biz-card p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  /* ---- MEDIA ---- */
+  .media-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  @media (max-width: 700px) {
+    .media-grid { grid-template-columns: 1fr; }
+  }
+
+  .media-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(45,140,106,0.15);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .media-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .media-img-placeholder {
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(135deg, var(--green-dark), var(--dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+  }
+
+  .media-body {
+    padding: 1.5rem;
+  }
+
+  .media-source {
+    font-size: 0.75rem;
+    color: var(--green);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+
+  .media-body h3 {
+    color: var(--text);
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .media-body p {
+    color: var(--text-dim);
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid rgba(45,140,106,0.1);
+    color: var(--text-dim);
+    font-size: 0.85rem;
+  }
+
+  footer .heart { color: #e74c3c; }
+
+  /* ---- ANIMATIONS ---- */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---- HIGHLIGHT ---- */
+  .highlight-box {
+    background: rgba(45,140,106,0.08);
+    border-left: 4px solid var(--green);
+    padding: 1.5rem 2rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0;
+  }
+
+  .highlight-box p {
+    color: var(--text-dim);
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  /* ---- PERSON CARD ---- */
+  .person-section {
+    background: linear-gradient(135deg, #0d1f14 0%, #112a1a 100%);
+    border-top: 1px solid rgba(45,140,106,0.12);
+    border-bottom: 1px solid rgba(45,140,106,0.12);
+  }
+
+  .person-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(45,140,106,0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .person-header {
+    background: linear-gradient(135deg, var(--green-dark), var(--deep-bg));
+    padding: 2.5rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(45,140,106,0.15);
+  }
+
+  .person-avatar {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: var(--green);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+    margin: 0 auto 1rem;
+    border: 3px solid var(--green-light);
+    box-shadow: 0 0 20px rgba(45,140,106,0.3);
+  }
+
+  .person-header h3 {
+    font-size: 1.6rem;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+
+  .person-header p {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+  }
+
+  .person-tags {
+    display: flex; gap: 0.5rem; justify-content: center;
+    flex-wrap: wrap; margin-top: 1rem;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.8rem;
+    border-radius: 20px;
+    background: rgba(45,140,106,0.2);
+    color: var(--green-light);
+    border: 1px solid rgba(45,140,106,0.3);
+  }
+
+  .person-body {
+    padding: 2rem 2.5rem;
+  }
+
+  .person-body h4 {
+    color: var(--green-light);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+  }
+
+  .person-body ul {
+    list-style: none;
+    margin-bottom: 1.5rem;
+  }
+
+  .person-body ul li {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(45,140,106,0.08);
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .person-body ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">企业研究 · 人物档案</div>
+    <h1>蝉鸣科技</h1>
+    <h2>CHANMING TECHNOLOGY · 移动教育服务平台</h2>
+    <div class="hero-quote">
+      以教育缴费为入口，构建教育行业数字化交易与服务生态。
+      让每一个教育环节都能在指尖完成。
+    </div>
+  </div>
+  <div class="scroll-hint">↓ 向下滚动</div>
+</section>
+
+<!-- ==================== COMPANY OVERVIEW ==================== -->
+<section>
+  <span class="section-label">公司概况</span>
+  <h2 class="section-title">蝉鸣<span>科技</span></h2>
+
+  <div class="intro-grid">
+    <div class="intro-text">
+      <p>蝉鸣科技（ChanMing Technology）成立于2014年，是一家专注于教育交易与服务领域的移动互联网公司，总部位于西安高新区。公司以"移动教育缴费"为切入点，逐步发展成为覆盖教育缴费、校园安全、 教育SaaS服务等多元业务的综合性教育科技平台。</p>
+      <p>蝉鸣科技致力于用科技手段解决教育行业的痛点问题，通过数字化手段提升教育机构的管理效率和家长的服务体验。公司旗下拥有多个创新产品线，服务范围涵盖K12教育机构、职业培训等多个领域。</p>
+      <p>2022年，西安高新区管委会副主任王海若、教育体育局局长饶小华等领导一行莅临蝉鸣科技参观指导，充分肯定了公司在教育科技领域的创新探索。</p>
+    </div>
+    <div>
+      <img class="intro-img"
+           src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&q=80"
+           alt="蝉鸣科技">
+      <div style="text-align:center; margin-top:0.8rem; color:var(--text-dim); font-size:0.8rem;">
+        教育科技 · 数字化转型
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-box" style="margin-top:2.5rem;">
+    <p>蝉鸣科技于近年获得了新一轮股权融资，投资方包括多家知名机构。公司持续深耕教育科技赛道，以技术创新驱动教育行业的数字化升级，目标成为国内领先的教育交易与服务综合平台。</p>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card fade-in">
+      <div class="stat-icon">📅</div>
+      <div class="stat-number">2014</div>
+      <div class="stat-label">成立年份</div>
+    </div>
+    <div class="stat-card fade-in">
+      <div class="stat-icon">📍</div>
+      <div class="stat-number">西安</div>
+      <div class="stat-label">总部所在地</div>
+    </div>
+    <div class="stat-card fade-in">
+      <div class="stat-icon">💰</div>
+      <div class="stat-number">融资</div>
+      <div class="stat-label">已完成股权融资</div>
+    </div>
+    <div class="stat-card fade-in">
+      <div class="stat-icon">🎓</div>
+      <div class="stat-number">教育</div>
+      <div class="stat-label">核心业务领域</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PERSON: ZHAO GUOFENG ==================== -->
+<div class="person-section">
+  <section>
+    <span class="section-label">核心人物</span>
+    <h2 class="section-title">联合创始人<span>赵国锋</span></h2>
+
+    <div class="person-card fade-in">
+      <div class="person-header">
+        <div class="person-avatar">赵</div>
+        <h3>赵国锋</h3>
+        <p>蝉鸣科技 · 联合创始人</p>
+        <div class="person-tags">
+          <span class="tag">西安工程大学 2007级</span>
+          <span class="tag">教育科技创业者</span>
+          <span class="tag">《非你莫属》BOSS团</span>
+        </div>
+      </div>
+      <div class="person-body">
+        <h4>▸ 个人背景</h4>
+        <ul>
+          <li>西安工程大学2007级校友</li>
+          <li>毕业后曾有丰富的工作经历，后转型创业</li>
+          <li>2014年与合伙人共同创立蝉鸣科技</li>
+        </ul>
+
+        <h4>▸ 创业历程</h4>
+        <ul>
+          <li>2014年：创立蝉鸣科技，聚焦移动教育缴费领域</li>
+          <li>2019年：受邀参加天津卫视《非你莫属》节目，作为BOSS团嘉宾亮相，展示蝉鸣科技业务逻辑与团队文化</li>
+          <li>2020年：蝉鸣科技子公司"北京学安未来"成立，专注校园安全领域，加入中国安全生产协会</li>
+          <li>2021年：接待西安工程大学西安校友会一行，进行深入交流分享</li>
+          <li>2022年：公司获新一轮股权融资，业务持续扩张</li>
+        </ul>
+
+        <h4>▸ 媒体亮相</h4>
+        <ul>
+          <li>2019年 天津卫视《非你莫属》BOSS团嘉宾</li>
+          <li>西安工程大学西安校友会走访企业代表</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== TIMELINE ==================== -->
+<section>
+  <span class="section-label">发展历程</span>
+  <h2 class="section-title">公司<span>大事记</span></h2>
+  <div class="timeline">
+    <div class="timeline-item fade-in">
+      <div class="timeline-year">2014年</div>
+      <h4>蝉鸣科技成立</h4>
+      <p>公司在西安正式创立，以移动教育缴费为主营业务切入教育科技赛道。</p>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-year">2019年</div>
+      <h4>赵国锋亮相《非你莫属》</h4>
+      <p>联合创始人赵国锋受邀参加天津卫视《非你莫属》，向全国观众展示蝉鸣科技的教育交易平台，蝉鸣科技正式进入公众视野。</p>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-year">2020年</div>
+      <h4>成立子公司，扩张业务版图</h4>
+      <p>子公司"北京学安未来"成立，专注校园安全领域产品创新；蝉鸣科技正式加入中国安全生产协会。</p>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-year">2021年</div>
+      <h4>西安校友会走访交流</h4>
+      <p>西安工程大学西安校友会一行10余人走访蝉鸣科技，赵国锋校友热情接待并进行深入交流，分享创业心得。</p>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-year">2022年</div>
+      <h4>获新一轮股权融资</h4>
+      <p>蝉鸣科技获得新一轮股权融资，投资方包括多家知名机构；同年12月，西安高新区管委会副主任王海若等领导莅临参观指导。</p>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-year">持续发展中</div>
+      <h4>深耕教育SaaS</h4>
+      <p>蝉鸣科技持续完善产品矩阵，聚焦教育交易与服务数字化，致力于成为国内领先的教育科技平台。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BUSINESS MODEL ==================== -->
+<div class="business-section">
+  <section>
+    <span class="section-label">商业模式</span>
+    <h2 class="section-title">核心<span>业务板块</span></h2>
+
+    <div class="business-cards">
+      <div class="biz-card fade-in">
+        <div class="biz-icon">💳</div>
+        <h3>教育缴费平台</h3>
+        <p>以移动支付为切入口，为教育机构和家长提供便捷的缴费通道，解决教育收费环节的痛点，支持学费、餐费、杂费等多元缴费场景。</p>
+      </div>
+      <div class="biz-card fade-in">
+        <div class="biz-icon">🏫</div>
+        <h3>校园安全服务</h3>
+        <p>通过"北京学安未来"子公司，提供校园安全管理解决方案，对接中国安全生产协会，推动校园安全教育的数字化升级。</p>
+      </div>
+      <div class="biz-card fade-in">
+        <div class="biz-icon">☁️</div>
+        <h3>教育SaaS服务</h3>
+        <p>面向教育机构提供一站式SaaS管理工具，涵盖报名、排课、考勤、数据分析等功能模块，提升机构运营效率。</p>
+      </div>
+      <div class="biz-card fade-in">
+        <div class="biz-icon">🔗</div>
+        <h3>家校连接生态</h3>
+        <p>构建教育机构与家长之间的数字化连接通道，以缴费为入口，逐步延伸到家校沟通、成长档案等综合服务生态。</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== MEDIA ==================== -->
+<section>
+  <span class="section-label">媒体报道</span>
+  <h2 class="section-title">媒体<span>报道</span></h2>
+
+  <div class="media-grid">
+    <div class="media-card fade-in">
+      <div class="media-img-placeholder">📺</div>
+      <div class="media-body">
+        <div class="media-source">网易新闻 · 2019年4月</div>
+        <h3>《非你莫属》BOSS团迎新面孔</h3>
+        <p>教育交易与服务平台蝉鸣科技联合创始人赵国锋亮相天津卫视《非你莫属》BOSS团，引发观众和求职者关注。</p>
+      </div>
+    </div>
+    <div class="media-card fade-in">
+      <div class="media-img-placeholder">🏢</div>
+      <div class="media-body">
+        <div class="media-source">搜狐 · 2022年12月</div>
+        <h3>西安高新区领导莅临指导</h3>
+        <p>西安高新区管委会副主任王海若、教育体育局局长饶小华等一行人莅临蝉鸣科技参观指导，双方就高新区未来教育合作展开交流。</p>
+      </div>
+    </div>
+    <div class="media-card fade-in">
+      <div class="media-img-placeholder">🤝</div>
+      <div class="media-body">
+        <div class="media-source">搜狐 · 2021年7月</div>
+        <h3>西安工程大学校友会走访</h3>
+        <p>西安工程大学西安校友会走访2007级校友公司——蝉鸣科技，赵国锋校友亲情接待并进行深入交流，分享创业经验与行业洞察。</p>
+      </div>
+    </div>
+    <div class="media-card fade-in">
+      <div class="media-img-placeholder">💰</div>
+      <div class="media-body">
+        <div class="media-source">投资界 · 融资报道</div>
+        <h3>蝉鸣科技获新一轮股权融资</h3>
+        <p>教育SaaS服务商蝉鸣科技获得新一轮股权融资，持续深耕教育科技赛道，扩展业务版图与产品矩阵。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="divider"></div>
+  <p>
+    蝉鸣科技 · ChanMing Technology<br>
+    <span style="color:var(--green-light);">教育交易与服务 SaaS 平台</span>
+  </p>
+  <p style="margin-top:1rem; font-size:0.8rem;">
+    本页面由 AI 整理公开信息制作 · 数据来源：网易、搜狐、投资界等公开报道
+  </p>
+  <p style="margin-top:0.5rem;">
+    用<span class="heart">❤</span>整理，以信息为准
+  </p>
+</footer>
+
+<script>
+  // Intersection Observer for fade-in animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
