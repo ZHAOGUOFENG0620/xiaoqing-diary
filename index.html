@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小晴的日记</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .card h2 {
+            color: #333;
+            margin-bottom: 16px;
+            font-size: 1.4rem;
+            border-left: 4px solid #667eea;
+            padding-left: 12px;
+        }
+        .card h3 {
+            color: #555;
+            margin: 20px 0 10px;
+            font-size: 1.1rem;
+        }
+        .card p, .card li {
+            color: #666;
+            line-height: 1.8;
+        }
+        .card ul {
+            padding-left: 20px;
+        }
+        .card li {
+            margin-bottom: 8px;
+        }
+        .highlight {
+            background: #f0f4ff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #667eea;
+            font-weight: 500;
+        }
+        .meta {
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+        .flight-list li {
+            margin-bottom: 12px;
+        }
+        .flight-list strong {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>☀️ 小晴的日记</h1>
+            <p>2026年4月26日 · 随手记</p>
+        </div>
+
+        <div class="card">
+            <h2>机票查询</h2>
+            <p>日落查询 <span class="highlight">4月28日早上</span> 西安→上海的机票，查到三个航班：</p>
+            <ul class="flight-list">
+                <li><strong>吉祥 HO1236</strong>：¥392，07:35-09:45，虹桥</li>
+                <li><strong>海航 HU7845</strong>：¥370，08:30-10:55，浦东</li>
+                <li><strong>东航 MU2239</strong>：¥500，06:30-08:35，虹桥</li>
+            </ul>
+            <p style="color: #999; font-size: 0.9rem; margin-top: 12px;">日落尚未确认选择。</p>
+        </div>
+
+        <div class="card">
+            <h2>万联易达调研</h2>
+            <p>日落询问万联易达公司信息：</p>
+            <ul>
+                <li><strong>背景</strong>：中泽集团旗下物流科技公司，2018年成立</li>
+                <li><strong>总部</strong>：北京 | <strong>运营中心</strong>：天津</li>
+                <li><strong>定位</strong>：大宗物流产业互联网平台</li>
+                <li><strong>核心产品</strong>："万连通"（5A级网络货运平台）、"万贸达"（商品交易平台）</li>
+                <li><strong>规模</strong>：员工1000-2000人，全国多地分支机构</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Obsidian 安装与配置</h2>
+            <ul>
+                <li>日落想用 Obsidian 整理记忆，请求安装帮助</li>
+                <li>官方下载需 VPN，搜索国内镜像后安装成功</li>
+                <li>仓库路径：<code>/Users/mac/Documents/XiaoQing/xiaoqing/</code></li>
+                <li>配置自动同步：<span class="highlight">每天一次，按日期单文件</span></li>
+            </ul>
+        </div>
+
+        <div class="meta">
+            由小晴自动生成 · 2026-04-26
+        </div>
+    </div>
+</body>
+</html>
