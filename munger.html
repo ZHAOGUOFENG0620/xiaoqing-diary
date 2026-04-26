@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>查理·芒格 · Charlie Munger</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8d5a3;
+    --dark: #1a1208;
+    --deep-brown: #2c1a0a;
+    --card-bg: #2d1f0e;
+    --text: #f5f0e8;
+    --text-dim: #a89070;
+  }
+
+  body {
+    font-family: "Georgia", "Noto Serif SC", "STSong", "SimSun", serif;
+    background: var(--dark);
+    color: var(--text);
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 50% 30%, #3d1f05 0%, #1a1208 70%);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(201,168,76,0.15) 0%, transparent 70%),
+      url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Charlie_Munger_2004.jpg/800px-Charlie_Munger_2004.jpg') center/cover no-repeat;
+    opacity: 0.35;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(26,18,8,0.3) 0%, rgba(26,18,8,0.9) 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .hero-avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 4px solid var(--gold);
+    object-fit: cover;
+    margin-bottom: 2rem;
+    box-shadow: 0 0 60px rgba(201,168,76,0.3);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    text-shadow: 0 2px 20px rgba(201,168,76,0.4);
+    margin-bottom: 0.5rem;
+  }
+
+  .hero h2 {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--text-dim);
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-quote {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--gold-light);
+    font-style: italic;
+    border-left: 3px solid var(--gold);
+    padding-left: 1.5rem;
+    text-align: left;
+  }
+
+  .hero-dates {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ---- SECTIONS ---- */
+  section {
+    padding: 5rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 0.3rem 1rem;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+  }
+
+  h2.section-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--text);
+    margin-bottom: 2.5rem;
+    font-weight: 700;
+  }
+
+  h2.section-title span { color: var(--gold); }
+
+  /* ---- BIO ---- */
+  .bio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  @media (max-width: 700px) {
+    .bio-grid { grid-template-columns: 1fr; }
+  }
+
+  .bio-text p {
+    color: var(--text-dim);
+    margin-bottom: 1.2rem;
+    font-size: 1.05rem;
+  }
+
+  .bio-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1.2;
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-top: 0.3rem;
+  }
+
+  .bio-img {
+    border-radius: 8px;
+    width: 100%;
+    border: 1px solid rgba(201,168,76,0.2);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  }
+
+  /* ---- QUOTES ---- */
+  .quotes-section {
+    background: linear-gradient(135deg, #1f1408 0%, #2a1a0a 100%);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .quotes-section section {
+    max-width: 900px;
+  }
+
+  .quote-card {
+    background: rgba(201,168,76,0.05);
+    border-left: 4px solid var(--gold);
+    padding: 2rem 2.5rem;
+    margin-bottom: 2rem;
+    border-radius: 0 8px 8px 0;
+    position: relative;
+  }
+
+  .quote-text {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: var(--text);
+    font-style: italic;
+    line-height: 1.9;
+    margin-bottom: 1rem;
+  }
+
+  .quote-text::before { content: '"'; color: var(--gold); font-size: 1.5em; }
+  .quote-text::after  { content: '"'; color: var(--gold); font-size: 1.5em; }
+
+  .quote-source {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+
+  /* ---- MENTAL MODELS ---- */
+  .models-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .model-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 10px;
+    padding: 1.8rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .model-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(201,168,76,0.15);
+    border-color: rgba(201,168,76,0.4);
+  }
+
+  .model-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .model-card h3 {
+    color: var(--gold);
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .model-card p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  /* ---- VIDEO ---- */
+  .video-section {
+    background: linear-gradient(135deg, #1a1208 0%, #251808 100%);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .video-section section {
+    max-width: 1000px;
+  }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  @media (max-width: 700px) {
+    .video-grid { grid-template-columns: 1fr; }
+  }
+
+  .video-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+  }
+
+  .video-wrapper iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+
+  .video-info {
+    padding: 1.2rem 1.5rem;
+  }
+
+  .video-info h3 {
+    color: var(--text);
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .video-info p {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+  }
+
+  /* ---- WISDOM TIMELINE ---- */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+    border-left: 2px solid rgba(201,168,76,0.2);
+    margin-top: 2rem;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    padding-left: 2rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.7rem;
+    top: 0.3rem;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 10px rgba(201,168,76,0.5);
+  }
+
+  .timeline-year {
+    font-size: 0.8rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-item h4 {
+    color: var(--text);
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .timeline-item p {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid rgba(201,168,76,0.1);
+    color: var(--text-dim);
+    font-size: 0.85rem;
+  }
+
+  footer .heart { color: #e74c3c; }
+
+  /* ---- DIVIDER ---- */
+  .divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 2rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <img class="hero-avatar"
+         src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Charlie_Munger_2004.jpg/800px-Charlie_Munger_2004.jpg"
+         alt="Charlie Munger"
+         onerror="this.style.display='none'">
+    <h1>查理·芒格</h1>
+    <h2>CHARLIE MUNGER · 1924—2023</h2>
+    <div class="hero-quote">
+      想要得到一样东西，最可靠的方法是让自己配得上拥有它。<br>
+      The best way to get something you want is to deserve to get it.
+    </div>
+    <div class="hero-dates">1924.01.01 — 2023.11.28 · 伯克希尔·哈撒韦副主席</div>
+  </div>
+  <div class="scroll-hint">↓ 向下滚动</div>
+</section>
+
+<!-- ==================== BIO ==================== -->
+<section>
+  <span class="section-label">人物生平</span>
+  <h2 class="section-title">传奇<span>人生</span></h2>
+
+  <div class="bio-grid">
+    <div class="bio-text">
+      <p>查理·芒格（Charlie Munger），1924年出生于美国内布拉斯加州的奥马哈，与沃伦·巴菲特是同乡兼毕生挚友。他不仅是伯克希尔·哈撒韦公司的副主席，更是巴菲特的"沉默搭档"与思想导师。</p>
+      <p>芒格年轻时曾做过律师，后转型投资，与巴菲特相遇后一见如故，共同将伯克希尔打造成人类历史上最成功的投资帝国。他以<b>多元思维模型（Mental Models）</b>著称，倡导跨学科学习、反向思考，被尊称为"行走的书架"（An intellectual with a library card）。</p>
+      <p>他一生著述不多，但每次公开演讲都直指本质、犀利深刻。其名言集《穷理查年鉴》（Poor Charlie's Almanack）风靡全球投资界。</p>
+    </div>
+
+    <div>
+      <img class="bio-img"
+           src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Warren_Buffett_and_Charlie_Munger_%28cropped%29.jpg/800px-Warren_Buffett_and_Charlie_Munger_%28cropped%29.jpg"
+           alt="Warren Buffett and Charlie Munger"
+           onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Charlie_Munger_2004.jpg/600px-Charlie_Munger_2004.jpg'">
+      <div style="text-align:center; margin-top:0.8rem; color:var(--text-dim); font-size:0.8rem;">
+        芒格与巴菲特，伯克希尔年会
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:3rem;">
+    <div class="bio-stats">
+      <div class="stat-card">
+        <div class="stat-number">99年</div>
+        <div class="stat-label">人生长度</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">60+年</div>
+        <div class="stat-label">投资生涯</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">>20%</div>
+        <div class="stat-label">伯克希尔年均回报</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">∞</div>
+        <div class="stat-label">智慧遗产</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TIMELINE ==================== -->
+<section>
+  <span class="section-label">关键节点</span>
+  <h2 class="section-title">人生<span>历程</span></h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-year">1924</div>
+      <h4>出生于奥马哈</h4>
+      <p>美国内布拉斯加州奥马哈，父亲是律师。童年时期便展现出超凡的聪慧。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1943</div>
+      <h4>密歇根大学退学，参军</h4>
+      <p>就读于密歇根大学数学系，后退学加入美国陆军航空队，担任气象预报员。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1949</div>
+      <h4>成为执业律师</h4>
+      <p>退伍后进入哈佛法学院深造，获法学博士学位，并开始执业。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1959</div>
+      <h4>与巴菲特初次相遇</h4>
+      <p>经朋友介绍认识了沃伦·巴菲特，两人一拍即合，开启了改变世界的合作。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1962</div>
+      <h4>创立芒格托尔曼&贝克斯事务所</h4>
+      <p>开始专业投资生涯，同时继续律师工作。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1978</div>
+      <h4>出任伯克希尔·哈撒韦副主席</h4>
+      <p>正式成为巴菲特的搭档，共同执掌伯克希尔，主导投资决策至今。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2005</div>
+      <h4>《穷理查年鉴》出版</h4>
+      <p>收录其历年演讲与智慧精华，成为全球投资者与企业家必读经典。</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2023.11.28</div>
+      <h4>在睡梦中安详离世，享年99岁</h4>
+      <p>距离百岁仅差一个月。巴菲特声明："如果只有巴菲特，没有芒格，伯克希尔不会走到今天。"</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== QUOTES ==================== -->
+<div class="quotes-section">
+  <section>
+    <span class="section-label">智慧金句</span>
+    <h2 class="section-title">芒格<span>箴言</span></h2>
+
+    <div class="quote-card">
+      <p class="quote-text">想要得到一样东西，最可靠的方法是让自己配得上拥有它。</p>
+      <div class="quote-source">— 查理·芒格</div>
+    </div>
+
+    <div class="quote-card">
+      <p class="quote-text">我只想知道我会死在哪里，然后永远不去那里。</p>
+      <div class="quote-source">— 反向思维（Invert, always invert）</div>
+    </div>
+
+    <div class="quote-card">
+      <p class="quote-text">多元化是你无知时保护自己的最好方式。真正重要的不是多元化本身，而是你必须在拥有真正优势的地方下注。</p>
+      <div class="quote-source">— 2003年伯克希尔年会</div>
+    </div>
+
+    <div class="quote-card">
+      <p class="quote-text">每天起床的时候，争取变得比你从前更聪明一点。认真地、出色地完成你的任务。慢慢地，你会有所进步，而这种进步一定会让你超越大多数人。</p>
+      <div class="quote-source">— 《穷理查年鉴》</div>
+    </div>
+
+    <div class="quote-card">
+      <p class="quote-text">当你持有好公司的时候，时间就是你的朋友；持有烂公司，时间就是你的敌人。</p>
+      <div class="quote-source">— 查理·芒格</div>
+    </div>
+
+    <div class="quote-card">
+      <p class="quote-text">永远不要和一头猪摔跤。如果你和猪摔跤，你会弄脏自己，而猪会很开心。</p>
+      <div class="quote-source">— 查理·芒格</div>
+    </div>
+
+    <div class="quote-card">
+      <p class="quote-text">最好是从别人的悲惨经历中学到深刻教训，而不是从自己的亲身经历中学。</p>
+      <div class="quote-source">— 查理·芒格</div>
+    </div>
+
+    <div class="quote-card">
+      <p class="quote-text">我这辈子遇到的聪明人，没有一个不是每天阅读的。没有，一个都没有。</p>
+      <div class="quote-source">— 查理·芒格</div>
+    </div>
+
+  </section>
+</div>
+
+<!-- ==================== MENTAL MODELS ==================== -->
+<section>
+  <span class="section-label">思维工具箱</span>
+  <h2 class="section-title">多元<span>思维模型</span></h2>
+  <p style="color:var(--text-dim); margin-bottom:2.5rem; font-size:1.05rem;">
+    芒格的核心智慧：掌握100种思维模型的框架，避免"铁锤人倾向"——在手里只有一把锤子的人眼里，世界就是一个钉子。
+  </p>
+
+  <div class="models-grid">
+    <div class="model-card">
+      <div class="model-icon">🔄</div>
+      <h3>反向思考（Inversion）</h3>
+      <p>不要问"如何成功"，而问"怎样一定会失败"，然后避免那些路径。芒格说："我只想知道我会死在哪里，然后永远不去那里。"</p>
+    </div>
+    <div class="model-card">
+      <div class="model-icon">🎯</div>
+      <h3>能力圈（Circle of Competence）</h3>
+      <p>只在自己真正理解的领域行动。对圈外保持谦逊，抵制诱惑，不懂的东西不投。</p>
+    </div>
+    <div class="model-card">
+      <div class="model-icon">⚖️</div>
+      <h3>概率思维（Probability）</h3>
+      <p>决策是概率游戏。评估每个选项的胜率与赔率，在胜率明显倾斜时下重注，而不是均等分散。</p>
+    </div>
+    <div class="model-card">
+      <div class="model-icon">🔗</div>
+      <h3>心智模型栅格（Latticework）</h3>
+      <p>跨学科整合：物理学、经济学、心理学、工程学、生物学……多元模型叠加，形成对世界更完整的理解。</p>
+    </div>
+    <div class="model-card">
+      <div class="model-icon">⏳</div>
+      <h3>长期主义（Long-term Thinking）</h3>
+      <p>用10年的眼光看问题，而不是10分钟。好的公司值得长期持有，耐心是最大的美德。</p>
+    </div>
+    <div class="model-card">
+      <div class="model-icon">🧠</div>
+      <h3>心理学障碍（Psychology of Misjudgment）</h3>
+      <p>人类大脑有25种认知偏误。了解它们，才能避免被自己的大脑欺骗。</p>
+    </div>
+    <div class="model-card">
+      <div class="model-icon">✂️</div>
+      <h3>极简主义（Simplicity）</h3>
+      <p>好投资不需要复杂。把事情简化到本质——好公司、合理价格、长期持有。复杂是投资者最大的敌人。</p>
+    </div>
+    <div class="model-card">
+      <div class="model-icon">🎭</div>
+      <h3>激励驱动（Incentive Theory）</h3>
+      <p>"告诉我激励机制，我会告诉你结果。" 理解激励，才能理解人的行为和组织的运作逻辑。</p>
+    </div>
+    <div class="model-card">
+      <div class="model-icon">🛡️</div>
+      <h3>护城河（Economic Moat）</h3>
+      <p>寻找有宽护城河的企业：品牌、网络效应、成本优势、特许经营权。护城河是企业长期竞争力的来源。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== VIDEO ==================== -->
+<div class="video-section">
+  <section>
+    <span class="section-label">珍贵影像</span>
+    <h2 class="section-title">经典<span>演讲</span></h2>
+
+    <div class="video-grid">
+      <!-- Video 1: Poor Charlie's Almanack talk -->
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/n9 TroyZ9boc?rel=0" allowfullscreen
+                  title="Charlie Munger - University of Michigan Speech"></iframe>
+        </div>
+        <div class="video-info">
+          <h3>🎤 密歇根大学毕业典礼演讲</h3>
+          <p>关于"如何过上痛苦的生活"——反过来听的幸福指南</p>
+        </div>
+      </div>
+
+      <!-- Video 2: CNBC Interview -->
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/wLJN7yKcLos?rel=0" allowfullscreen
+                  title="Charlie Munger - CNBC Interview"></iframe>
+        </div>
+        <div class="video-info">
+          <h3>📺 CNBC 专访</h3>
+          <p>关于投资、生活与智慧——巴菲特最信任的搭档</p>
+        </div>
+      </div>
+
+      <!-- Video 3: Daily Journal Meeting -->
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/saGfrDYNd1c?rel=0" allowfullscreen
+                  title="Charlie Munger - Daily Journal Meeting"></iframe>
+        </div>
+        <div class="video-info">
+          <h3>🏛️ Daily Journal 年度大会</h3>
+          <p>晚年经典演讲，对年轻人和投资者的珍贵忠告</p>
+        </div>
+      </div>
+
+      <!-- Video 4: Berkshire Hathaway Meeting -->
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/Y2oNPEkp5T8?rel=0" allowfullscreen
+                  title="Charlie Munger - Berkshire Hathaway Meeting"></iframe>
+        </div>
+        <div class="video-info">
+          <h3>📈 伯克希尔股东大会</h3>
+          <p>每年巴菲特与芒格的神仙对话，智慧的巅峰碰撞</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== LEGACY ==================== -->
+<section>
+  <span class="section-label">永恒遗产</span>
+  <h2 class="section-title">最后的<span>礼物</span></h2>
+  <div class="bio-grid">
+    <div>
+      <img class="bio-img"
+           src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Charlie_Munger_%288088663556%29.jpg/600px-Charlie_Munger_%288088663556%29.jpg"
+           alt="Charlie Munger speaking"
+           onerror="this.style.display='none'">
+    </div>
+    <div class="bio-text">
+      <p style="font-size:1.15rem; line-height:2; color:var(--text);">
+        芒格留给世人的，不只是投资哲学，更是一种<strong style="color:var(--gold);">活法</strong>——用理性面对不确定，用阅读对抗无知，用长期主义对抗焦虑。
+      </p>
+      <p>
+        他99岁高龄仍在每日阅读，办公室没有电脑，书架是真正的"武器"。他教会我们：<br>
+        <strong style="color:var(--gold);">活得聪明，比活得长更重要。</strong>
+      </p>
+      <p style="margin-top:1.5rem; padding:1.2rem; background:rgba(201,168,76,0.08); border-radius:6px; border-left:3px solid var(--gold); font-style:italic;">
+        "我认为我和巴菲特做的最明智的事情，就是一直待在那些少数几个我们真正理解的行业里。那些行业太难了，我们做不了，于是我们错过了很多机会。但那没关系——因为那些机会需要的能力超出我们的能力范围。"
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="divider"></div>
+  <p>
+    查理·芒格 · Charlie Munger · 1924—2023<br>
+    <span style="color:var(--gold);">"Tell you what's right and let you choose."</span>
+  </p>
+  <p style="margin-top:1rem;">
+    本页面由 AI 整理制作 · 图片来源：维基百科 &amp; 公开网络
+  </p>
+  <p style="margin-top:0.5rem;">
+    用<span class="heart">❤</span>整理，以纪念这位智者
+  </p>
+</footer>
+
+<script>
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Fade-in animation on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.quote-card, .model-card, .timeline-item, .stat-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
