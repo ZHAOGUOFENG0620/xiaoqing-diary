@@ -146,6 +146,7 @@
             .countdown .days { font-size: 3rem; }
             .route { flex-direction: column; align-items: flex-start; }
             .route-arrow { transform: rotate(90deg); }
+            [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
         }
     </style>
 </head>
@@ -174,7 +175,7 @@
                 <div class="route-arrow">→</div>
                 <div class="route-point">🏎️ 许昌</div>
                 <div class="route-arrow">→</div>
-                <div class="route-point">🏡 山阳</div>
+                <div class="route-point">🏡 山阳/嵩县</div>
                 <div class="route-arrow">→</div>
                 <div class="route-point">🏠 西安</div>
             </div>
@@ -251,9 +252,35 @@
 
             <div style="margin-bottom: 28px;">
                 <span class="day-badge">Day 4 · 5月4日 周日</span>
-                <p><strong>山阳县</strong></p>
-                <p>🏡 探亲休整</p>
-                <p>🎯 附近可选：<span class="spot-tag">天竺山国家森林公园</span><span class="spot-tag">月亮洞溶洞</span><span class="spot-tag">漫川关古镇</span></p>
+                <p style="font-size: 1.1rem; margin-bottom: 16px;">🎯 <strong>两个目的地可选，出发前决定</strong></p>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px;">
+                    <!-- 选项A：山阳县 -->
+                    <div style="background: #f0fdf4; border-radius: 14px; overflow: hidden; border: 2px solid #38ef7d;">
+                        <img src="https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2025%2F0505%2F215e6c67j00svro7100m6d000nm00f7p.jpg&thumbnail=660x2147483647&quality=80&type=jpg" style="width:100%; height: 140px; object-fit: cover;" alt="漫川关古镇" onerror="this.style.display='none'">
+                        <div style="padding: 16px;">
+                            <p style="font-size: 1.05rem; margin-bottom: 8px;"><strong>🏡 选项A · 山阳县</strong></p>
+                            <p style="font-size: 0.82rem; color: #888; margin-bottom: 8px;">老家探亲 + 秦楚文化探秘</p>
+                            <p style="font-size: 0.85rem; color: #555; line-height: 1.7; margin-bottom: 8px;"><strong>漫川关古镇</strong> — "朝秦暮楚"典故发源地，陕豫楚三省交界的千年古镇，明清会馆群保存完好</p>
+                            <p style="font-size: 0.85rem; color: #555; line-height: 1.7; margin-bottom: 8px;"><strong>天竺山</strong> — 国家4A级景区，唐代罗公远、宋代理学家邵雍曾隐居于此，森林覆盖率88%</p>
+                            <p style="font-size: 0.85rem; color: #555; line-height: 1.7;"><strong>漫川大调</strong> — 地方曲艺走上国际舞台，秦楚"和"文化活化石</p>
+                        </div>
+                    </div>
+
+                    <!-- 选项B：嵩县 -->
+                    <div style="background: #eff6ff; border-radius: 14px; overflow: hidden; border: 2px solid #60a5fa;">
+                        <img src="https://qimg4.youxiake.com/upload/201907/26/20151564113870.jpg?imageMogr2/thumbnail/!730x411r/gravity/Center/crop/!730x411/quality/100" style="width:100%; height: 140px; object-fit: cover;" alt="陆浑湖" onerror="this.style.display='none'">
+                        <div style="padding: 16px;">
+                            <p style="font-size: 1.05rem; margin-bottom: 8px;"><strong>🌊 选项B · 嵩县</strong></p>
+                            <p style="font-size: 0.82rem; color: #888; margin-bottom: 8px;">山水秘境 + 理学文化溯源</p>
+                            <p style="font-size: 0.85rem; color: #555; line-height: 1.7; margin-bottom: 8px;"><strong>白云山</strong> — 中原名山，玉皇顶海拔2216米，云海瀑布堪称一绝</p>
+                            <p style="font-size: 0.85rem; color: #555; line-height: 1.7; margin-bottom: 8px;"><strong>陆浑湖</strong> — 5万亩碧波荡漾，《诗经》"鹤鸣于九皋"之地，中原最佳水上乐园</p>
+                            <p style="font-size: 0.85rem; color: #555; line-height: 1.7;"><strong>两程故里</strong> — 北宋程颢程颐兄弟故居，宋代理学发源地，影响中外千年</p>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="margin-top: 12px; font-size: 0.88rem; color: #888;">💡 山阳有老家可以住，嵩县需预订住宿</p>
             </div>
 
             <div>
